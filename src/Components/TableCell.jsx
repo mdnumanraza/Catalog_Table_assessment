@@ -2,6 +2,18 @@
 
 import React from "react";
 
+const isValidURL = (string) => {
+  try {
+      new URL(string);
+      return true;
+  } catch (_) {
+      return false;  
+  }
+};
+
+
+
+
 const TableCell = ({ type, value, options, onChange }) => {
   const baseInputClasses = "w-full p-2  rounded focus:outline-none text-white bg-slate-700 ";
 
@@ -19,14 +31,22 @@ const TableCell = ({ type, value, options, onChange }) => {
       );
     case "link":
       return (
-        <td>
+        <td onClick={() => {
+          if (isValidURL(value)) {
+              window.open(value, '_blank'); // Opens the link in a new tab
+          } else {
+              alert('Please enter a valid URL.');
+          }
+      }}>
           <input
-            type="text"
-            value={value}
-            className={`${baseInputClasses} `}
-            onChange={(e) => onChange(e.target.value)}
+              type="text"
+              value={value}
+              className={`${baseInputClasses} `}
+              onChange={(e) => onChange(e.target.value)}
           />
-        </td>
+      </td>
+      
+      
       );
     case "checkbox":
       return (
