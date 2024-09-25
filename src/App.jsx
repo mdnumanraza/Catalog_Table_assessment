@@ -7,10 +7,6 @@ import DraggableColumn from "./Components/DraggableCol";
 import TableCell from "./Components/TableCell";
 import ControlPanel from "./Components/ControlPanel";
 
-const ItemTypes = {
-  ROW: "row",
-};
-
 const App = () => {
   const [columns, setColumns] = useState(
     () => JSON.parse(localStorage.getItem("tableColumns")) || initialConfig
@@ -71,6 +67,7 @@ const App = () => {
   const downloadTable = () => {
     const tableState = { columns, data };
     console.log(JSON.stringify(tableState, null, 2));
+    alert("please check console");
   };
 
   return (
